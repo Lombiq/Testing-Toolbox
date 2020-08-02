@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Lombiq.Tests.Helpers
@@ -12,8 +11,6 @@ namespace Lombiq.Tests.Helpers
     // able to test UserGroupService. Also see: https://stackoverflow.com/questions/49165810/how-to-mock-usermanager-in-net-core-testing
     public static class UserManagerMockHelpers
     {
-        public static StringBuilder LogMessage = new StringBuilder();
-
         public static Mock<UserManager<TUser>> MockUserManager<TUser>() where TUser : class
         {
             var store = new Mock<IUserStore<TUser>>();
