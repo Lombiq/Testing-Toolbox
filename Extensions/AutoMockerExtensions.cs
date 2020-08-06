@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.Extensions.Localization;
 
 namespace Moq.AutoMock
 {
@@ -13,5 +14,10 @@ namespace Moq.AutoMock
         /// <param name="objects">The collection of instances to be registered</param>
         /// <typeparam name="T">The service type.</typeparam>
         public static void Some<T>(this AutoMocker mocker, params T[] objects) => mocker.Use<IEnumerable<T>>(objects);
+
+        public static void MockStringLocalizer<T>(this AutoMocker mocker) =>
+            mocker.GetMock<IStringLocalizer<T>>()
+                .Setup(localizer => localizer[It.IsAny<string>()])
+                .Returns<string>(parameter => new LocalizedString(parameter, parameter));
     }
 }
