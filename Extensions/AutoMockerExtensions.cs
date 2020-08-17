@@ -11,7 +11,7 @@ namespace Moq.AutoMock
         /// implementations of a given service as <see cref="IEnumerable{TService}"/>.
         /// </summary>
         /// <param name="mocker">The <see cref="AutoMocker"/> performing the registration.</param>
-        /// <param name="objects">The collection of instances to be registered</param>
+        /// <param name="objects">The collection of instances to be registered.</param>
         /// <typeparam name="T">The service type.</typeparam>
         public static void Some<T>(this AutoMocker mocker, params T[] objects) => mocker.Use<IEnumerable<T>>(objects);
 

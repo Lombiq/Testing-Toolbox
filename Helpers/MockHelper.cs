@@ -14,7 +14,7 @@ namespace Lombiq.Tests.Helpers
         public static ControllerContext CreateMockControllerContextWithUser() =>
             new ControllerContext
             {
-                HttpContext = new DefaultHttpContext { User = new ClaimsPrincipal() }
+                HttpContext = new DefaultHttpContext { User = new ClaimsPrincipal() },
             };
 
         public static void ConfigureMockAutherizationService(this AutoMocker mocker, AuthorizationResult authorizationResult) =>
@@ -26,10 +26,12 @@ namespace Lombiq.Tests.Helpers
                     It.IsAny<IEnumerable<IAuthorizationRequirement>>()))
                 .ReturnsAsync(authorizationResult);
 
-        public static T CreateAutoMockerInstance<T>(Action<AutoMocker> configurator = null) where T : class =>
+        public static T CreateAutoMockerInstance<T>(Action<AutoMocker> configurator = null)
+where T : class =>
             CreateAutoMockerInstance<T>(configurator, out _);
 
-        public static T CreateAutoMockerInstance<T>(out AutoMocker mocker) where T : class =>
+        public static T CreateAutoMockerInstance<T>(out AutoMocker mocker)
+where T : class =>
             CreateAutoMockerInstance<T>(null, out mocker);
 
         // Note that configurator is also needed because if you want control on what exactly will be injected into the
