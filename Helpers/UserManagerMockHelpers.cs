@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace Lombiq.Tests.Helpers
 {
     // Copy-pasted from https://github.com/dotnet/aspnetcore/blob/master/src/Identity/test/Shared/MockHelpers.cs to be
-    // able to test UserGroupService. Also see: https://stackoverflow.com/questions/49165810/how-to-mock-usermanager-in-net-core-testing
+    // able to test UserGroupService. Also see:
+    // https://stackoverflow.com/questions/49165810/how-to-mock-usermanager-in-net-core-testing
     public static class UserManagerMockHelpers
     {
         public static Mock<UserManager<TUser>> MockUserManager<TUser>()
