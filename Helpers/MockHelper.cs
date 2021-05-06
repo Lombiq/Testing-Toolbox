@@ -12,7 +12,7 @@ namespace Lombiq.Tests.Helpers
     public static class MockHelper
     {
         public static ControllerContext CreateMockControllerContextWithUser() =>
-            new ControllerContext
+            new()
             {
                 HttpContext = new DefaultHttpContext { User = new ClaimsPrincipal() },
             };
