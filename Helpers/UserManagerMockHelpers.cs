@@ -16,10 +16,10 @@ namespace Lombiq.Tests.Helpers
             where TUser : class
         {
             var store = new Mock<IUserStore<TUser>>();
-            var mgr = new Mock<UserManager<TUser>>(store.Object, null, null, null, null, null, null, null, null);
-            mgr.Object.UserValidators.Add(new UserValidator<TUser>());
-            mgr.Object.PasswordValidators.Add(new PasswordValidator<TUser>());
-            return mgr;
+            var userManagerMock = new Mock<UserManager<TUser>>(store.Object, null, null, null, null, null, null, null, null);
+            userManagerMock.Object.UserValidators.Add(new UserValidator<TUser>());
+            userManagerMock.Object.PasswordValidators.Add(new PasswordValidator<TUser>());
+            return userManagerMock;
         }
 
         public static Mock<RoleManager<TRole>> MockRoleManager<TRole>(IRoleStore<TRole> store = null)
