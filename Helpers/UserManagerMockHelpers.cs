@@ -16,7 +16,10 @@ namespace Lombiq.Tests.Helpers
             where TUser : class
         {
             var store = new Mock<IUserStore<TUser>>();
+            // These are params arguments, can't be named. MA bug, see: https://github.com/meziantou/Meziantou.Analyzer/issues/276
+#pragma warning disable MA0003 // Add argument name to improve readability
             var userManagerMock = new Mock<UserManager<TUser>>(store.Object, null, null, null, null, null, null, null, null);
+#pragma warning restore MA0003 // Add argument name to improve readability
             userManagerMock.Object.UserValidators.Add(new UserValidator<TUser>());
             userManagerMock.Object.PasswordValidators.Add(new PasswordValidator<TUser>());
             return userManagerMock;
@@ -27,12 +30,15 @@ namespace Lombiq.Tests.Helpers
         {
             store ??= new Mock<IRoleStore<TRole>>().Object;
             var roles = new List<IRoleValidator<TRole>> { new RoleValidator<TRole>() };
+            // These are params arguments, can't be named. MA bug, see: https://github.com/meziantou/Meziantou.Analyzer/issues/276
+#pragma warning disable MA0003 // Add argument name to improve readability
             return new Mock<RoleManager<TRole>>(
                 store,
                 roles,
                 new UpperInvariantLookupNormalizer(),
                 new IdentityErrorDescriber(),
                 null);
+#pragma warning restore MA0003 // Add argument name to improve readability
         }
 
         public static Mock<IOptions<IdentityOptions>> MockIdentityOptions()
@@ -60,7 +66,7 @@ namespace Lombiq.Tests.Helpers
                 pwdValidators,
                 new UpperInvariantLookupNormalizer(),
                 new IdentityErrorDescriber(),
-                null,
+                services: null,
                 new Mock<ILogger<UserManager<TUser>>>().Object);
             validator.Setup(v => v.ValidateAsync(userManager, It.IsAny<TUser>()))
                 .Returns(Task.FromResult(IdentityResult.Success)).Verifiable();
@@ -77,7 +83,7 @@ namespace Lombiq.Tests.Helpers
                 roles,
                 new UpperInvariantLookupNormalizer(),
                 new IdentityErrorDescriber(),
-                null);
+                logger: null);
         }
     }
 }
