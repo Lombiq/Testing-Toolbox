@@ -20,7 +20,7 @@ namespace Lombiq.Tests.Helpers
         public static void ConfigureMockAutherizationService(this AutoMocker mocker, AuthorizationResult authorizationResult) =>
             mocker
                 .GetMock<IAuthorizationService>()
-                .Setup(x => x.AuthorizeAsync(
+                .Setup(authorizationService => authorizationService.AuthorizeAsync(
                     It.IsAny<ClaimsPrincipal>(),
                     It.IsAny<object>(),
                     It.IsAny<IEnumerable<IAuthorizationRequirement>>()))
