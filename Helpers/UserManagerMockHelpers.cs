@@ -16,10 +16,10 @@ namespace Lombiq.Tests.Helpers
             where TUser : class
         {
             var store = new Mock<IUserStore<TUser>>();
-            var mgr = new Mock<UserManager<TUser>>(store.Object, null, null, null, null, null, null, null, null);
-            mgr.Object.UserValidators.Add(new UserValidator<TUser>());
-            mgr.Object.PasswordValidators.Add(new PasswordValidator<TUser>());
-            return mgr;
+            var userManagerMock = new Mock<UserManager<TUser>>(store.Object, null, null, null, null, null, null, null, null);
+            userManagerMock.Object.UserValidators.Add(new UserValidator<TUser>());
+            userManagerMock.Object.PasswordValidators.Add(new PasswordValidator<TUser>());
+            return userManagerMock;
         }
 
         public static Mock<RoleManager<TRole>> MockRoleManager<TRole>(IRoleStore<TRole> store = null)
@@ -60,7 +60,7 @@ namespace Lombiq.Tests.Helpers
                 pwdValidators,
                 new UpperInvariantLookupNormalizer(),
                 new IdentityErrorDescriber(),
-                null,
+                services: null,
                 new Mock<ILogger<UserManager<TUser>>>().Object);
             validator.Setup(v => v.ValidateAsync(userManager, It.IsAny<TUser>()))
                 .Returns(Task.FromResult(IdentityResult.Success)).Verifiable();
@@ -77,7 +77,7 @@ namespace Lombiq.Tests.Helpers
                 roles,
                 new UpperInvariantLookupNormalizer(),
                 new IdentityErrorDescriber(),
-                null);
+                logger: null);
         }
     }
 }

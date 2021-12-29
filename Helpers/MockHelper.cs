@@ -20,7 +20,7 @@ namespace Lombiq.Tests.Helpers
         public static void ConfigureMockAutherizationService(this AutoMocker mocker, AuthorizationResult authorizationResult) =>
             mocker
                 .GetMock<IAuthorizationService>()
-                .Setup(x => x.AuthorizeAsync(
+                .Setup(authorizationService => authorizationService.AuthorizeAsync(
                     It.IsAny<ClaimsPrincipal>(),
                     It.IsAny<object>(),
                     It.IsAny<IEnumerable<IAuthorizationRequirement>>()))
@@ -53,7 +53,7 @@ namespace Lombiq.Tests.Helpers
         /// </param>
         public static T CreateAutoMockerInstance<T>(out AutoMocker mocker, bool enablePrivate = false)
             where T : class =>
-            CreateAutoMockerInstance<T>(null, enablePrivate, out mocker);
+            CreateAutoMockerInstance<T>(configurator: null, enablePrivate, out mocker);
 
         /// <summary>
         /// Creates an <see cref="AutoMocker"/> and resolves an instance of <typeparamref name="T"/> from it.
