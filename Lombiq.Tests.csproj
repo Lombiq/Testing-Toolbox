@@ -6,6 +6,22 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);.git*</DefaultItemExcludes>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Title>Lombiq Testing Toolbox for Orchard Core</Title>
+    <Authors>Lombiq Technologies</Authors>
+    <Copyright>Copyright © 2020, Lombiq Technologies Ltd.</Copyright>
+    <Description>General and unit testing extensions and helpers, mostly for ASP.NET Core and Orchard Core. See the project website for detailed documentation.</Description>
+    <PackageTags>OrchardCore;Lombiq;AspNetCore;Moq;xUnit</PackageTags>
+    <RepositoryUrl>https://github.com/Lombiq/Testing-Toolbox</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Lombiq/Testing-Toolbox</PackageProjectUrl>
+    <PackageLicenseFile>Licence.md</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Licence.md" Pack="true" PackagePath="" />
+    <None Include="Readme.md" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.15" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />

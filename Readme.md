@@ -1,6 +1,8 @@
 # Lombiq Testing Toolbox for Orchard Core
 
 
+[![Lombiq.Tests NuGet](https://img.shields.io/nuget/v/Lombiq.Tests?label=Lombiq.Tests)](https://www.nuget.org/packages/Lombiq.Tests/)
+
 
 ## About
 
