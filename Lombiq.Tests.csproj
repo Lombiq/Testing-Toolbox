@@ -11,7 +11,7 @@
     <Authors>Lombiq Technologies</Authors>
     <Copyright>Copyright © 2020, Lombiq Technologies Ltd.</Copyright>
     <Description>General and unit testing extensions and helpers, mostly for ASP.NET Core and Orchard Core. See the project website for detailed documentation.</Description>
-    <PackageTags>OrchardCore;Lombiq;AspNetCore;Moq;xUnit</PackageTags>
+    <PackageTags>OrchardCore;Lombiq;AspNetCore;Moq;xUnit;UnitTesting;Testing</PackageTags>
     <RepositoryUrl>https://github.com/Lombiq/Testing-Toolbox</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Lombiq/Testing-Toolbox</PackageProjectUrl>
     <PackageLicenseFile>Licence.md</PackageLicenseFile>
