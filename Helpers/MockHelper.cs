@@ -17,7 +17,11 @@ namespace Lombiq.Tests.Helpers
                 HttpContext = new DefaultHttpContext { User = new ClaimsPrincipal() },
             };
 
+        [Obsolete("Use the correctly named ConfigureMockAuthorizationService() instead.")]
         public static void ConfigureMockAutherizationService(this AutoMocker mocker, AuthorizationResult authorizationResult) =>
+            ConfigureMockAuthorizationService(mocker, authorizationResult);
+
+        public static void ConfigureMockAuthorizationService(this AutoMocker mocker, AuthorizationResult authorizationResult) =>
             mocker
                 .GetMock<IAuthorizationService>()
                 .Setup(authorizationService => authorizationService.AuthorizeAsync(

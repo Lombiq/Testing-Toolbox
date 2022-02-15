@@ -2,14 +2,31 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <IsPackable>false</IsPackable>
+    <IsPackable>true</IsPackable>
     <DefaultItemExcludes>$(DefaultItemExcludes);.git*</DefaultItemExcludes>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <Title>Lombiq Testing Toolbox for Orchard Core</Title>
+    <Authors>Lombiq Technologies</Authors>
+    <Copyright>Copyright © 2020, Lombiq Technologies Ltd.</Copyright>
+    <Description>Lombiq Testing Toolbox for Orchard Core: General and unit testing extensions and helpers, mostly for ASP.NET Core and Orchard Core. See the project website for detailed documentation.</Description>
+    <PackageTags>OrchardCore;Lombiq;AspNetCore;Moq;xUnit;UnitTesting;Testing</PackageTags>
+    <PackageIcon>NuGetIcon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/Lombiq/Testing-Toolbox</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Lombiq/Testing-Toolbox</PackageProjectUrl>
+    <PackageLicenseFile>Licence.md</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Licence.md" Pack="true" PackagePath="" />
+    <None Include="Readme.md" />
+    <None Include="NuGetIcon.png" Pack="true" PackagePath="" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.15" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
     <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="Shouldly" Version="4.0.3" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -19,5 +36,14 @@
     </PackageReference>
     <PackageReference Include="Moq.AutoMock" Version="2.3.0" />
   </ItemGroup>
+
+  <!-- These are necessary for symbols NuGet packaging, otherwise Shouldly would prevent PDBs to be packaged, see:
+  https://github.com/NuGet/Home/discussions/11541. -->
+  <PropertyGroup Condition="'$(NuGetBuild)' == 'true'">
+    <Optimize>true</Optimize>
+    <DebugType>portable</DebugType>
+    <Deterministic>true</Deterministic>
+    <DeterministicSourcePaths>true</DeterministicSourcePaths>
+  </PropertyGroup>
   
 </Project>
