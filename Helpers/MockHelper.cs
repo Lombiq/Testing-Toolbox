@@ -35,12 +35,12 @@ public static class MockHelper
     /// </summary>
     /// <typeparam name="T">The type to resolve.</typeparam>
     /// <param name="configurator">
-    /// Delegate to apply configuration to the <see cref="AutoMocker"/> instance. Optional, defaults to
-    /// <see langword="null"/>.
+    /// Delegate to apply configuration to the <see cref="AutoMocker"/> instance. Optional, defaults to <see
+    /// langword="null"/>.
     /// </param>
     /// <param name="enablePrivate">
-    /// When <see langword="true"/>, non-public constructors will also be used to create mocks. Optional, defaults
-    /// to <see langword="false"/>.
+    /// When <see langword="true"/>, non-public constructors will also be used to create mocks. Optional, defaults to
+    /// <see langword="false"/>.
     /// </param>
     public static T CreateAutoMockerInstance<T>(Action<AutoMocker> configurator = null, bool enablePrivate = false)
         where T : class =>
@@ -52,8 +52,8 @@ public static class MockHelper
     /// <typeparam name="T">The type to resolve.</typeparam>
     /// <param name="mocker">The newly created <see cref="AutoMocker"/> instance.</param>
     /// <param name="enablePrivate">
-    /// When <see langword="true"/>, non-public constructors will also be used to create mocks. Optional, defaults
-    /// to <see langword="false"/>.
+    /// When <see langword="true"/>, non-public constructors will also be used to create mocks. Optional, defaults to
+    /// <see langword="false"/>.
     /// </param>
     public static T CreateAutoMockerInstance<T>(out AutoMocker mocker, bool enablePrivate = false)
         where T : class =>

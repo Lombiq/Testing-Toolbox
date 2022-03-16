@@ -7,8 +7,8 @@ public static class AutoMockerExtensions
 {
     /// <summary>
     /// Register zero or more services with <see cref="AutoMocker.Use{TService}(TService)"/> as <see
-    /// cref="IEnumerable{TService}"/>. This is to simulate the DI feature where you can inject all implementations
-    /// of a given service as <see cref="IEnumerable{TService}"/>.
+    /// cref="IEnumerable{TService}"/>. This is to simulate the DI feature where you can inject all implementations of a
+    /// given service as <see cref="IEnumerable{TService}"/>.
     /// </summary>
     /// <param name="mocker">The <see cref="AutoMocker"/> performing the registration.</param>
     /// <param name="objects">The collection of instances to be registered.</param>
