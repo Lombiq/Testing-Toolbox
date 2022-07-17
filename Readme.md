@@ -1,8 +1,6 @@
 # Lombiq Testing Toolbox for Orchard Core
 
-
 [![Lombiq.Tests NuGet](https://img.shields.io/nuget/v/Lombiq.Tests?label=Lombiq.Tests)](https://www.nuget.org/packages/Lombiq.Tests/)
-
 
 ## About
 
@@ -12,7 +10,6 @@ Do you want to learn about unit testing in Orchard Core? Check out the [unit tes
 
 Do you want to quickly try out this project and see it in action? Check it out in our [Open-Source Orchard Core Extensions](https://github.com/Lombiq/Open-Source-Orchard-Core-Extensions) full Orchard Core solution and also see our other useful Orchard Core-related open-source projects!
 
-
 ## Documentation
 
 Included helpers:
@@ -21,7 +18,6 @@ Included helpers:
 - `UserManager<TUser>` mocking helpers.
 
 Inline documentation for methods is always included so be sure to check that out.
-
 
 ## Contributing and support
 
