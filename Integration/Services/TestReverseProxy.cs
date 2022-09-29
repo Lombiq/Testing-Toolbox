@@ -41,7 +41,7 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
                 .AddRouting())
             .Configure(builder =>
             {
-                var httpForwarder = builder.ApplicationServices.GetService<IHttpForwarder>();
+                var httpForwarder = builder.ApplicationServices.GetRequiredService<IHttpForwarder>();
 
                 builder.UseRouting()
                     .UseEndpoints(endpoints => endpoints
