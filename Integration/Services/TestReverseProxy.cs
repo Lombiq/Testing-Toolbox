@@ -30,7 +30,7 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
     {
         if (_webHost != null)
         {
-            throw new InvalidOperationException("Instance not started.");
+            throw new InvalidOperationException("The instance has already started.");
         }
 
         var webHostBuilder = new WebHostBuilder()
@@ -49,7 +49,10 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
                         {
                             using var client = new HttpMessageInvoker(
                                 new TestProxyMessageHandler(_proxyConnectionProvider.CreateClient()));
-                            await httpForwarder.SendAsync(httpContext, _proxyConnectionProvider.BaseAddress, client);
+                            await httpForwarder.SendAsync(
+                                httpContext,
+                                _proxyConnectionProvider.BaseAddress.ToString(),
+                                client);
                         }));
             });
 
@@ -62,7 +65,7 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
     {
         if (_webHost == null)
         {
-            throw new InvalidOperationException("The instance has not been not started.");
+            throw new InvalidOperationException("The instance has not been started.");
         }
 
         return StopInternalAsync();

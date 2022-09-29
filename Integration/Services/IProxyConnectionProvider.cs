@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 
 namespace Lombiq.Tests.Integration.Services;
@@ -10,7 +11,7 @@ public interface IProxyConnectionProvider
     /// <summary>
     /// Gets the url prefix for where to forward the request to.
     /// </summary>
-    string BaseAddress { get; }
+    Uri BaseAddress { get; }
 
     /// <summary>
     /// Creates the HTTP client used to forward the request to.
