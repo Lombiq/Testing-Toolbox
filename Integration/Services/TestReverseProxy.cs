@@ -100,15 +100,9 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
 
     public async ValueTask DisposeAsync()
     {
-        if (_disposed || _disposedAsync)
-        {
-            return;
-        }
+        if (_disposed || _disposedAsync) return;
 
-        if (_webHost != null)
-        {
-            await StopAsync().ConfigureAwait(false);
-        }
+        if (_webHost != null) await StopAsync().ConfigureAwait(false);
 
         _disposedAsync = true;
 
