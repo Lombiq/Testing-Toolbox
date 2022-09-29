@@ -62,7 +62,7 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
     {
         if (_webHost == null)
         {
-            throw new InvalidOperationException("Instance not started.");
+            throw new InvalidOperationException("The instance has not been not started.");
         }
 
         return StopInternalAsync();
