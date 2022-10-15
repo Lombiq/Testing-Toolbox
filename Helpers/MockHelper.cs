@@ -19,6 +19,11 @@ public static class MockHelper
             {
                 User = new ClaimsPrincipal(),
                 RequestServices = serviceProvider ?? new ServiceCollection().BuildServiceProvider(),
+                Request =
+                {
+                    Host = HostString.FromUriComponent(new Uri("https://localhost/")),
+                    IsHttps = true,
+                },
             },
         };
 
