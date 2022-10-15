@@ -3,6 +3,7 @@ using Lombiq.Tests.Resolvers;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Moq.AutoMock.Resolvers;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -21,10 +22,32 @@ public static class AutoMockerExtensions
     /// <typeparam name="T">The service type.</typeparam>
     public static void Some<T>(this AutoMocker mocker, params T[] objects) => mocker.Use<IEnumerable<T>>(objects);
 
-    public static void MockStringLocalizer<T>(this AutoMocker mocker) =>
-        mocker.GetMock<IStringLocalizer<T>>()
+    public static IStringLocalizer<T> MockStringLocalizer<T>(this AutoMocker mocker)
+    {
+        var localizerMock = mocker.GetMock<IStringLocalizer<T>>();
+        localizerMock
             .Setup(localizer => localizer[It.IsAny<string>()])
             .Returns<string>(parameter => new LocalizedString(parameter, parameter));
+        return localizerMock.Object;
+    }
+
+    public static void MockStringLocalization(this AutoMocker mocker)
+    {
+        var localizer = mocker.MockStringLocalizer<Mock>();
+        var factoryMock = new Mock<IStringLocalizerFactory>();
+
+        factoryMock
+            .Setup(factory => factory.Create(It.IsAny<Type>()))
+            .Returns<Type>(_ => localizer);
+
+        factoryMock
+            .Setup(factory => factory.Create(It.IsAny<string>(), It.IsAny<string>()))
+            .Returns<string, string>((_, _) => localizer);
+
+        mocker.Use(factoryMock.Object);
+        mocker.Use<IStringLocalizer>(localizer);
+        mocker.EnsureResolver<StringLocalizerResolver>();
+    }
 
     /// <summary>
     /// Registers a new <see cref="LoggerFactory"/> that uses <see cref="ListLogger"/>.
@@ -35,15 +58,7 @@ public static class AutoMockerExtensions
         Justification = "It's up to the service provider.")]
     public static void MockLogging(this AutoMocker mocker)
     {
-        mocker.Use(new LoggerFactory(new[] { new ListLoggerProvider() }));
-        mocker.EnsureResolver<LoggerResolver>();
-    }
-
-    public static void MockStringLocalization(this AutoMocker mocker)
-    {
-        var factory = new Mock<IStringLocalizerFactory>();
-        factory.Setup()
-        mocker.Use(new StringLo(new[] { new ListLoggerProvider() }));
+        mocker.Use<ILoggerFactory>(new LoggerFactory(new[] { new ListLoggerProvider() }));
         mocker.EnsureResolver<LoggerResolver>();
     }
 
