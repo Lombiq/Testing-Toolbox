@@ -11,12 +11,8 @@ public class LoggerResolver : GenericTypeResolver
 
     protected override object ResolveValue(AutoMocker mocker, Type serviceType, Type genericType)
     {
-        var factory = mocker.Get<ILoggerFactory>();
-        if (factory == null)
-        {
-            mocker.MockLogging();
-            factory = mocker.Get<ILoggerFactory>() ?? throw new InvalidOperationException("Couldn't mock logging!");
-        }
+        var factory = mocker.Get<ILoggerFactory>() ?? throw new InvalidOperationException(
+            $"Missing service. Please call {nameof(AutoMockerExtensions.MockLogging)}.");
 
         return factory.CreateLogger(genericType.Name);
     }
@@ -28,13 +24,8 @@ public class StringLocalizerResolver : GenericTypeResolver
 
     protected override object ResolveValue(AutoMocker mocker, Type serviceType, Type genericType)
     {
-        var factory = mocker.Get<IStringLocalizerFactory>();
-        if (factory == null)
-        {
-            mocker.MockStringLocalization();
-            factory = mocker.Get<IStringLocalizerFactory>() ??
-                throw new InvalidOperationException("Couldn't mock string localization!");
-        }
+        var factory = mocker.Get<IStringLocalizerFactory>() ?? throw new InvalidOperationException(
+            $"Missing service. Please call {nameof(AutoMockerExtensions.MockStringLocalization)}.");
 
         return factory.Create(genericType);
     }

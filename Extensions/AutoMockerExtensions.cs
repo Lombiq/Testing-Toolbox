@@ -56,10 +56,14 @@ public static class AutoMockerExtensions
         "Reliability",
         "CA2000:Dispose objects before losing scope",
         Justification = "It's up to the service provider.")]
-    public static void MockLogging(this AutoMocker mocker)
+    public static ListLoggerProvider MockLogging(this AutoMocker mocker)
     {
-        mocker.Use<ILoggerFactory>(new LoggerFactory(new[] { new ListLoggerProvider() }));
+        var provider = new ListLoggerProvider();
+
+        mocker.Use<ILoggerFactory>(new LoggerFactory(new ILoggerProvider[] { provider }));
         mocker.EnsureResolver<LoggerResolver>();
+
+        return provider;
     }
 
     public static void EnsureResolver<TResolver>(this AutoMocker mocker)
