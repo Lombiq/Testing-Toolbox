@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Moq.AutoMock;
 using System;
@@ -11,10 +12,19 @@ namespace Lombiq.Tests.Helpers;
 
 public static class MockHelper
 {
-    public static ControllerContext CreateMockControllerContextWithUser() =>
+    public static ControllerContext CreateMockControllerContextWithUser(IServiceProvider serviceProvider = null) =>
         new()
         {
-            HttpContext = new DefaultHttpContext { User = new ClaimsPrincipal() },
+            HttpContext = new DefaultHttpContext
+            {
+                User = new ClaimsPrincipal(),
+                RequestServices = serviceProvider ?? new ServiceCollection().BuildServiceProvider(),
+                Request =
+                {
+                    Host = HostString.FromUriComponent(new Uri("https://localhost/")),
+                    IsHttps = true,
+                },
+            },
         };
 
     [Obsolete("Use the correctly named ConfigureMockAuthorizationService() instead.")]
