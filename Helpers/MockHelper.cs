@@ -28,7 +28,7 @@ public static class MockHelper
         };
 
     [Obsolete("Use the correctly named ConfigureMockAuthorizationService() instead.")]
-    public static void ConfigureMockAuthorizationService(this AutoMocker mocker, AuthorizationResult authorizationResult) =>
+    public static void ConfigureMockAutherizationService(this AutoMocker mocker, AuthorizationResult authorizationResult) =>
         ConfigureMockAuthorizationService(mocker, authorizationResult);
 
     public static void ConfigureMockAuthorizationService(this AutoMocker mocker, AuthorizationResult authorizationResult) =>
