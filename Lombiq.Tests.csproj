@@ -42,5 +42,5 @@
     <Deterministic>true</Deterministic>
     <DeterministicSourcePaths>true</DeterministicSourcePaths>
   </PropertyGroup>
-  
+
 </Project>
