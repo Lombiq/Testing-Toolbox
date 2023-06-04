@@ -115,7 +115,7 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
 
     // This is required because HttpClient instance is not usable directly because of performance issues. Explained here:
     // https://github.com/microsoft/reverse-proxy/blob/92370b140092e852745e98fbc33987da57b723b2/src/ReverseProxy/Forwarder/HttpForwarder.cs#L97
-    internal class TestProxyMessageHandler : HttpMessageHandler
+    internal sealed class TestProxyMessageHandler : HttpMessageHandler
     {
         private HttpClient _client;
 
