@@ -4,7 +4,7 @@
 
 ## About
 
-General and unit testing extensions and helpers, mostly for ASP.NET Core and Orchard Core. Also see our [UI Testing Toolbox](https://github.com/Lombiq/UI-Testing-Toolbox).
+General and unit testing extensions and helpers, mostly for ASP.NET Core and Orchard Core. Check out the Orchard Harvest 2023 conference talk about automated QA in Orchard Core, including this project, [here](https://youtu.be/CHdhwD2NHBU). Also see our [UI Testing Toolbox](https://github.com/Lombiq/UI-Testing-Toolbox).
 
 Do you want to learn about unit testing in Orchard Core? Check out the [unit testing tutorial of our Training Demo module](https://github.com/Lombiq/Orchard-Training-Demo-Module/blob/dev/Services/TestedService.cs).
 
