@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -6,12 +6,10 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Lombiq.Tests.Integration.Services;
 
-public class ListLogger : ILogger
+public class ListLogger(string categoryName) : ILogger
 {
-    public string CategoryName { get; }
+    public string CategoryName { get; } = categoryName;
     public IList<LogEntry> Logs { get; } = new List<LogEntry>();
-
-    public ListLogger(string categoryName) => CategoryName = categoryName;
 
     public IDisposable BeginScope<TState>(TState state) => throw new NotSupportedException();
     public bool IsEnabled(LogLevel logLevel) => throw new NotSupportedException();
