@@ -51,7 +51,7 @@ public static class UserManagerMockHelpers
         var userValidators = new List<IUserValidator<TUser>>();
         var validator = new Mock<IUserValidator<TUser>>();
         userValidators.Add(validator.Object);
-        var pwdValidators = new List<PasswordValidator<TUser>> { new PasswordValidator<TUser>() };
+        var pwdValidators = new List<PasswordValidator<TUser>> { new() };
         var userManager = new UserManager<TUser>(
             store,
             options.Object,
