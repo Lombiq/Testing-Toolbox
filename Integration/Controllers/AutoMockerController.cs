@@ -1,4 +1,4 @@
-using Lombiq.Tests.Helpers;
+﻿using Lombiq.Tests.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
@@ -34,7 +34,7 @@ public class AutoMockerController : Controller
     public void SetRequestUri(Uri uri)
     {
         HttpContext.Request.Host = HostString.FromUriComponent(uri);
-        HttpContext.Request.IsHttps = uri.Scheme.Equals("HTTPS", StringComparison.OrdinalIgnoreCase);
+        HttpContext.Request.IsHttps = uri.Scheme.ToUpperInvariant() == "HTTPS";
 
         if (!string.IsNullOrEmpty(uri.AbsolutePath) && uri.AbsolutePath != "/")
         {

@@ -9,15 +9,16 @@ using Yarp.ReverseProxy.Forwarder;
 
 namespace Lombiq.Tests.Integration.Services;
 
-public class TestReverseProxy(string rootUrl) : IDisposable, IAsyncDisposable
+public class TestReverseProxy : IDisposable, IAsyncDisposable
 {
-    private const string Pattern = "/{**catch-all}";
     private bool _disposed;
     private bool _disposedAsync;
     private IWebHost _webHost;
     private IProxyConnectionProvider _proxyConnectionProvider;
 
-    public string RootUrl { get; private set; } = rootUrl;
+    public string RootUrl { get; private set; }
+
+    public TestReverseProxy(string rootUrl) => RootUrl = rootUrl;
 
     public void AttachConnectionProvider(IProxyConnectionProvider clientConnectionProvider) =>
         _proxyConnectionProvider = clientConnectionProvider;
@@ -44,7 +45,7 @@ public class TestReverseProxy(string rootUrl) : IDisposable, IAsyncDisposable
 
                 builder.UseRouting()
                     .UseEndpoints(endpoints => endpoints
-                        .Map(Pattern, async httpContext =>
+                        .Map("/{**catch-all}", async httpContext =>
                         {
                             using var client = new HttpMessageInvoker(
                                 new TestProxyMessageHandler(_proxyConnectionProvider.CreateClient()));
@@ -114,9 +115,11 @@ public class TestReverseProxy(string rootUrl) : IDisposable, IAsyncDisposable
 
     // This is required because HttpClient instance is not usable directly because of performance issues. Explained here:
     // https://github.com/microsoft/reverse-proxy/blob/92370b140092e852745e98fbc33987da57b723b2/src/ReverseProxy/Forwarder/HttpForwarder.cs#L97
-    internal sealed class TestProxyMessageHandler(HttpClient client) : HttpMessageHandler
+    internal sealed class TestProxyMessageHandler : HttpMessageHandler
     {
-        private HttpClient _client = client;
+        private HttpClient _client;
+
+        public TestProxyMessageHandler(HttpClient client) => _client = client;
 
         protected override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
