@@ -11,6 +11,7 @@ namespace Lombiq.Tests.Integration.Services;
 
 public class TestReverseProxy : IDisposable, IAsyncDisposable
 {
+    private const string Pattern = "/{**catch-all}";
     private bool _disposed;
     private bool _disposedAsync;
     private IWebHost _webHost;
@@ -45,7 +46,7 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
 
                 builder.UseRouting()
                     .UseEndpoints(endpoints => endpoints
-                        .Map("/{**catch-all}", async httpContext =>
+                        .Map(Pattern, async httpContext =>
                         {
                             using var client = new HttpMessageInvoker(
                                 new TestProxyMessageHandler(_proxyConnectionProvider.CreateClient()));
