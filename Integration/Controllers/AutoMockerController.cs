@@ -33,6 +33,8 @@ public class AutoMockerController : Controller
 
     public void SetRequestUri(Uri uri)
     {
+        if (!ModelState.IsValid) return;
+
         HttpContext.Request.Host = HostString.FromUriComponent(uri);
         HttpContext.Request.IsHttps = uri.Scheme.Equals("HTTPS", StringComparison.OrdinalIgnoreCase);
 

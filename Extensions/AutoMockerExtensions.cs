@@ -60,7 +60,7 @@ public static class AutoMockerExtensions
     {
         var provider = new ListLoggerProvider();
 
-        mocker.Use<ILoggerFactory>(new LoggerFactory(new ILoggerProvider[] { provider }));
+        mocker.Use<ILoggerFactory>(new LoggerFactory([provider]));
         mocker.EnsureResolver<LoggerResolver>();
 
         return provider;
