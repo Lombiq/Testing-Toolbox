@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace Lombiq.Tests.Integration.Services;
 public class ListLogger : ILogger
 {
     public string CategoryName { get; }
-    public IList<LogEntry> Logs { get; } = new List<LogEntry>();
+    public IList<LogEntry> Logs { get; } = [];
 
     public ListLogger(string categoryName) => CategoryName = categoryName;
 
