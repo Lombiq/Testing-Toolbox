@@ -54,7 +54,8 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
                                 httpContext,
                                 _proxyConnectionProvider.BaseAddress.ToString(),
                                 client);
-                        }));
+                        }))
+                    .UsePathBase(Environment.GetEnvironmentVariable("LOMBIQ_UI_TESTING_TOOLBOX_URL_PREFIX"));
             });
 
         _webHost = webHostBuilder.Build();
