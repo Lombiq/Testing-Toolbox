@@ -18,8 +18,13 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
     private IProxyConnectionProvider _proxyConnectionProvider;
 
     public string RootUrl { get; private set; }
+    public string BasePath { get; private set; }
 
-    public TestReverseProxy(string rootUrl) => RootUrl = rootUrl;
+    public TestReverseProxy(string rootUrl, string basePath)
+    {
+        RootUrl = rootUrl;
+        BasePath = basePath;
+    }
 
     public void AttachConnectionProvider(IProxyConnectionProvider clientConnectionProvider) =>
         _proxyConnectionProvider = clientConnectionProvider;
@@ -55,7 +60,7 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
                                 _proxyConnectionProvider.BaseAddress.ToString(),
                                 client);
                         }))
-                    .UsePathBase(Environment.GetEnvironmentVariable("LOMBIQ_UI_TESTING_TOOLBOX_URL_PREFIX"));
+                    .UsePathBase(BasePath);
             });
 
         _webHost = webHostBuilder.Build();
