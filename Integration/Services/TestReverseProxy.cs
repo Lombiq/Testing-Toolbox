@@ -18,13 +18,8 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
     private IProxyConnectionProvider _proxyConnectionProvider;
 
     public string RootUrl { get; private set; }
-    public string BasePath { get; private set; }
 
-    public TestReverseProxy(string rootUrl, string basePath)
-    {
-        RootUrl = rootUrl;
-        BasePath = basePath;
-    }
+    public TestReverseProxy(string rootUrl) => RootUrl = rootUrl;
 
     public void AttachConnectionProvider(IProxyConnectionProvider clientConnectionProvider) =>
         _proxyConnectionProvider = clientConnectionProvider;
@@ -59,8 +54,7 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
                                 httpContext,
                                 _proxyConnectionProvider.BaseAddress.ToString(),
                                 client);
-                        }))
-                    .UsePathBase(BasePath);
+                        }));
             });
 
         _webHost = webHostBuilder.Build();
