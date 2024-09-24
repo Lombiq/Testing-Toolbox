@@ -12,7 +12,7 @@ namespace Lombiq.Tests.Integration.Controllers;
 /// A controller or base class for testing features on controllers. Its HTTP context, host environment and service
 /// providers are initialized during construction.
 /// </summary>
-public class AutoMockerController : Controller
+public sealed class AutoMockerController : Controller
 {
     public string Environment { get; set; } = Environments.Development;
 
