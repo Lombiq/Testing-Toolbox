@@ -1,6 +1,6 @@
 using Lombiq.Tests.Helpers;
 
-namespace Xunit.Abstractions;
+namespace Xunit;
 
 public static class TestOutputHelperExtensions
 {
