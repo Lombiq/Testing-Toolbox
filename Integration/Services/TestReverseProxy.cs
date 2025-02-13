@@ -59,7 +59,11 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
 
         _webHost = webHostBuilder.Build();
 
+        // This object is managed directly via its public methods and it should be only explicitly shut down and
+        // disposed by them.
+#pragma warning disable MA0040 // Use an overload with a CancellationToken
         return _webHost.StartAsync();
+#pragma warning restore MA0040 // Use an overload with a CancellationToken
     }
 
     public Task StopAsync()
@@ -74,7 +78,11 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
 
     private async Task StopInternalAsync()
     {
+        // This object is managed directly via its public methods and it should be only explicitly shut down and
+        // disposed by them.
+#pragma warning disable MA0040 // Use an overload with a CancellationToken
         await _webHost.StopAsync();
+#pragma warning restore MA0040 // Use an overload with a CancellationToken
         _webHost.Dispose();
         _webHost = null;
     }
