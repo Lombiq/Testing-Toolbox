@@ -3,4 +3,16 @@
     extends: [
         'github>Lombiq/Open-Source-Orchard-Core-Extensions:renovate-osoce-orchard-core-submodule.json5',
     ],
+    packageRules: [
+        {
+            // 3.6.0 and later transitively reference Roslyn 4.14.0.0 packages, causing errors of the following kind:
+            // "CSC : error CS9057: The analyzer assembly
+            // '/home/runner/.nuget/packages/moq.automock/3.6.0/analyzers/dotnet/cs/Moq.AutoMocker.Generators.dll'
+            // references version '4.14.0.0' of the compiler, which is newer than the currently running version
+            // '4.10.0.0'." under .NET 8. This needs .NET 10.
+            matchPackageNames: [ 'Moq.AutoMock'],
+            allowedVersions: '<3.6.0',
+            matchCurrentVersion: '/^3\\.5\\./',
+        },
+    ],
 }
