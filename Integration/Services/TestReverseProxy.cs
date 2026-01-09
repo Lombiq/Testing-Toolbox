@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Net.Http;
 using System.Threading;
@@ -14,7 +15,7 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
     private const string Pattern = "/{**catch-all}";
     private bool _disposed;
     private bool _disposedAsync;
-    private IWebHost _webHost;
+    private IHost _webHost;
     private IProxyConnectionProvider _proxyConnectionProvider;
 
     public string RootUrl { get; private set; }
@@ -34,7 +35,7 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
             throw new InvalidOperationException("The instance has already started.");
         }
 
-        var webHostBuilder = new WebHostBuilder()
+        var webHostBuilder = new HostBuilder().ConfigureWebHost(webHostBuilder => webHostBuilder
             .UseKestrel()
             .UseUrls(RootUrl)
             .ConfigureServices(services => services
@@ -55,7 +56,7 @@ public class TestReverseProxy : IDisposable, IAsyncDisposable
                                 _proxyConnectionProvider.BaseAddress.ToString(),
                                 client);
                         }));
-            });
+            }));
 
         _webHost = webHostBuilder.Build();
 
