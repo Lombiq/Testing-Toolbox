@@ -3,4 +3,15 @@
     extends: [
         'github>Lombiq/Open-Source-Orchard-Core-Extensions:renovate-osoce-orchard-core-submodule.json5',
     ],
+    packageRules: [
+        {
+            // Moq.AutoMock ships the Moq.AutoMocker.Generators analyzer, which can require a newer Roslyn than the
+            // NuGet packaging pipeline's compiler, causing a CS9057 error (see OSOE-1311). So, we need to update it
+            // manually and verify the "Validate NuGet Publish" workflow still passes.
+            matchPackageNames: [
+                'Moq.AutoMock',
+            ],
+            enabled: false,
+        },
+    ],
 }
