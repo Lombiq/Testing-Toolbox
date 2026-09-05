@@ -21,6 +21,22 @@ Included helpers:
 
 Inline documentation for methods is always included so be sure to check that out.
 
+## Test runner
+
+This library uses xUnit v3 package version 4.0.0. Test projects should reference `xunit.v3` 4.0.0 or later and use [Microsoft Testing Platform](https://xunit.net/docs/getting-started/v3/microsoft-testing-platform). The `Lombiq.MSBuild.OrchardCore.Tests.Sdk` SDK configures the test executable and reporting extensions.
+
+For `dotnet test` with .NET 10 or later, add this to the solution's _global.json_ (preserving any existing SDK settings):
+
+```json
+{
+  "test": {
+    "runner": "Microsoft.Testing.Platform"
+  }
+}
+```
+
+Run a project with `dotnet test --project path/to/Tests.csproj`, or a solution with `dotnet test --solution path/to/Solution.slnx`. Remove the `Microsoft.NET.Test.Sdk` and `xunit.runner.visualstudio` package references when migrating from VSTest.
+
 ## Contributing and support
 
 Bug reports, feature requests, comments, questions, code contributions and love letters are warmly welcome. You can send them to us via GitHub issues and pull requests. Please adhere to our [open-source guidelines](https://lombiq.com/open-source-guidelines) while doing so.
