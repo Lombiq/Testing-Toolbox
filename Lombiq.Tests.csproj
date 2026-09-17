@@ -19,7 +19,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.11" />
     <PackageReference Include="Moq" Version="4.20.72" />
     <PackageReference Include="Shouldly" Version="4.3.0" />
-    <PackageReference Include="xunit.v3.extensibility.core" Version="3.2.2" />
+    <PackageReference Include="xunit.v3.extensibility.core" Version="4.0.0" />
     <!-- Kept on 4.0.2: 4.0.3's Moq.AutoMocker.Generators analyzer requires a newer Roslyn than the NuGet packaging
          pipeline's compiler supports, breaking "dotnet pack" with CS9057. -->
     <PackageReference Include="Moq.AutoMock" Version="4.0.2" />
