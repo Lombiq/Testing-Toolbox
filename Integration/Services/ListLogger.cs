@@ -34,9 +34,7 @@ public class ListLoggerProvider : ILoggerProvider
     private readonly ConcurrentDictionary<string, ListLogger> _loggers = new();
 
     public ILogger CreateLogger(string categoryName) =>
-        _loggers.TryGetValue(categoryName, out var logger) ?
-            logger :
-            _loggers.GetOrAdd(categoryName, new ListLogger(categoryName));
+        _loggers.GetOrAdd(categoryName, static name => new ListLogger(name));
 
     public void Dispose() => GC.SuppressFinalize(this);
 }
