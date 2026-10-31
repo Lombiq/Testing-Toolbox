@@ -1,0 +1,23 @@
+name: Test Compatibility Suppressions Major Version Check
+
+on:
+  push:
+    branches:
+      - issue/OSOE-1309
+
+jobs:
+  test:
+    name: Test ${{ matrix.version }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # Expected: 7.0.0 and the prerelease pass; 6.0.1 (the latest tag itself) and 6.0.2 fail.
+        version: [7.0.0, 7.0.1-alpha.0.osoe-1309, 6.0.1, 6.0.2]
+    uses: Lombiq/GitHub-Actions/.github/workflows/publish-nuget.yml@issue/OSOE-1309
+    with:
+      publish-version: ${{ matrix.version }}
+      require-major-version-for-compatibility-suppressions: 'true'
+      dry-run: true
+      mark-breaking-changes: 'false'
+    secrets:
+      API_KEY: not needed
