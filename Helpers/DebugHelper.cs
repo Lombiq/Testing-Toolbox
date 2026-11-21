@@ -14,8 +14,6 @@ public static class DebugHelper
         else Debug.WriteLine(PrefixWithTimestamp(format), args);
     }
 
-    // Note that this uses UTC, while Atata's log uses the local time zone:
-    // https://github.com/atata-framework/atata/issues/483.
     public static string PrefixWithTimestamp(string message) =>
         $"{DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.ffff", CultureInfo.InvariantCulture)} - {message}";
 }
